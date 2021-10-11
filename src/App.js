@@ -7,10 +7,7 @@ import Message from "./Message";
 
 function App() {
   const [input, setInput] = useState("");
-  const [messages, setMessages] = useState([
-    { username: "jags: ", text: "hey fb" },
-    { username: "aadhi: ", text: "hello" },
-  ]);
+  const [messages, setMessages] = useState([]);
   const [username, setUsername] = useState("");
 
   useEffect(() => {
@@ -47,7 +44,7 @@ function App() {
       </form>
 
       {messages.map((message) => (
-        <Message username={message.username} text={message.text} />
+        <Message username={username} message={message} />
       ))}
     </div>
   );
