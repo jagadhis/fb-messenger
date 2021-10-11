@@ -1,14 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./App.css";
 import Button from "@mui/material/Button";
 import FormControl from "@mui/material/FormControl";
 import { Input, InputLabel } from "@mui/material";
+import Message from "./Message";
 
 function App() {
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState(["hello", "hi"]);
-  console.log(input);
-  console.log(messages);
+  const [username, setUsername] = useState("");
+
+  useEffect(() => {
+    setUsername(prompt("please enter your name"));
+  }, []);
 
   const sendMessage = (event) => {
     event.preventDefault();
@@ -18,6 +22,7 @@ function App() {
   return (
     <div className="App">
       <h1>lets build a fb-messenger 🚀</h1>
+      <h2>Welcome {username}</h2>
       <form>
         <FormControl>
           <InputLabel>Enter a message...</InputLabel>
@@ -37,8 +42,9 @@ function App() {
           Send Message
         </Button>
       </form>
+
       {messages.map((message) => (
-        <p>{message}</p>
+        <Message text={message} />
       ))}
     </div>
   );
