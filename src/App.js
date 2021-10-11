@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 import "./App.css";
+import Button from "@mui/material/Button";
+import FormControl from "@mui/material/FormControl";
+import { Input, InputLabel } from "@mui/material";
 
 function App() {
   const [input, setInput] = useState("");
@@ -8,6 +11,7 @@ function App() {
   console.log(messages);
 
   const sendMessage = (event) => {
+    event.preventDefault();
     setMessages([...messages, input]);
     setInput("");
   };
@@ -15,13 +19,23 @@ function App() {
     <div className="App">
       <h1>lets build a fb-messenger 🚀</h1>
       <form>
-        <input
-          value={input}
-          onChange={(event) => setInput(event.target.value)}
-        />
-        <button type="submit" onClick={sendMessage}>
+        <FormControl>
+          <InputLabel>Enter a message...</InputLabel>
+          <Input
+            value={input}
+            onChange={(event) => setInput(event.target.value)}
+          />
+        </FormControl>
+
+        <Button
+          disabled={!input}
+          variant="contained"
+          color="primary"
+          type="submit"
+          onClick={sendMessage}
+        >
           Send Message
-        </button>
+        </Button>
       </form>
       {messages.map((message) => (
         <p>{message}</p>
