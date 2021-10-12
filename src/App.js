@@ -4,11 +4,18 @@ import Button from "@mui/material/Button";
 import FormControl from "@mui/material/FormControl";
 import { Input, InputLabel } from "@mui/material";
 import Message from "./Message";
+import db from "./firebase";
 
 function App() {
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState([]);
   const [username, setUsername] = useState("");
+
+  useEffect(() => {
+    db.collection("messages").onSnapshot((snapshot) => {
+      setMessages(snapshot.docs.map((doc) => doc.data()));
+    });
+  }, []);
 
   useEffect(() => {
     setUsername(prompt("please enter your name"));
